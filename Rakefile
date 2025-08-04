@@ -12,7 +12,7 @@ end
 
 desc "Start the server"
 task :server do  
-  if ActiveRecord::Base.connection.migration_context.needs_migration?
+  if ActiveRecord::Migrator.respond_to?(:needs_migration?) && ActiveRecord::Migrator.needs_migration?
     puts "Migrations are pending. Make sure to run `rake db:migrate` first."
     return
   end
