@@ -13,6 +13,7 @@ RSpec.configure do |config|
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
+    Rake::Task['db:migrate'].execute
   end
 
   config.before do
@@ -38,11 +39,11 @@ RSpec.configure do |config|
   config.mock_with :rspec do |mocks|
     mocks.verify_partial_doubles = true
   end
-  
+
   config.shared_context_metadata_behavior = :apply_to_host_groups
 end
 
 # Rack::Test::Methods needs this to run our controller
 def app
-  Rack::Builder.parse_file('config.ru').first
+  Rack::Builder.parse_file('config.ru')
 end
