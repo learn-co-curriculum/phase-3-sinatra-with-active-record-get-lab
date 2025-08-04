@@ -1,3 +1,3 @@
 class Bakery < ActiveRecord::Base
-  has_many :BakedGoods
+  has_many :baked_goods
 end
